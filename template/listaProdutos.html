@@ -1,0 +1,55 @@
+<div ng-controller="ListaProdutosController" class="col-md-12">
+	<div  class="col-md-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h4>Seu Carrinho</h4></div>
+			<div class="panel-body">
+			    <table class=" table table-striped" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+						<th>Produto</th>
+						<th>Preço (R$)</th>
+						<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in carrinho ">
+							<td >{{ x.descricao }}</td>
+							<td >{{ x.preco }}</td>
+							<td ><button data-id="{{ x.id }}" ng-click="retirarCarrinho($event)" class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Retirar</button></td>
+		  				</tr>
+					</tbody>
+				</table>
+				<label>Total (R$): </label><label>{{ total }}</label>
+				<div ng-show="compraFinalizada" class="alert alert-success" role="alert"><b>Parabéns!</b> Compra realizada com sucesso.</div>
+				<button ng-disabled="carrinho.length == 0" ng-click="finalizarPedido($event)" class="btn btn-primary col-md-12"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Finalizar Compra</button>
+			  </div>
+		</div>
+	</div>
+	<div  class="col-md-8">
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h4>Produtos Disponíveis</h4></div>
+			<div class="panel-body">
+				<input type="text" class="form-control col-md-12" style="margin-bottom:20px;" title="Digite para filtrar" placeholder="Digite para Filtrar"  ng-model="filtro">
+				<table class=" table table-striped" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+						<th>Produto</th>
+						<th>Preço (R$)</th>
+						<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in produtos | filter : filtro">
+							<td >{{ x.descricao }}</td>
+							<td >{{ x.preco }}</td>
+							<td ><button class="btn btn-default" data-descricao="{{ x.descricao }}" data-preco="{{ x.preco }}" ng-click="adicionarCarrinho($event)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar ao Carrinho</button></td>
+		  				</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
